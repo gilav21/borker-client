@@ -1,0 +1,32 @@
+<div class="signup-wrapper">
+  <!-- email: new FormControl('', [Validators.email, Validators.required]),
+  userName: new FormControl('', [Validators.required]),
+  firstName: new FormControl('', [Validators.required]),
+  lastName: new FormControl('', [Validators.required]),
+  password: new FormControl('', [Validators.required]) -->
+  <form [formGroup]="formGroup" class="signup-form">
+    <mat-form-field>
+      <mat-label class="email">Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="userName">User Name</mat-label>
+      <input matInput formControlName="userName"/>
+      <mat-hint *ngIf="formGroup.controls['userName'].dirty && !formGroup.controls['userName'].hasError"></mat-hint>
+      <mat-error *ngIf="formGroup.controls['userName'].dirty && formGroup.controls['userName'].hasError"></mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="userName">First Name</mat-label>
+      <input matInput formControlName="firstName"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="userName">Last Name</mat-label>
+      <input matInput formControlName="lastName"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label class="password">Password</mat-label>
+      <input matInput formControlName="password" type="password" />
+    </mat-form-field>
+  </form>
+  <button mat-raised-button [disabled]="formGroup.invalid" (click)="onSignUp()">Sign Up</button>
+</div>

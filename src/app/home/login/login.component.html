@@ -1,0 +1,19 @@
+<div class="login-wrapper">
+  <div class="input-wrapper">
+    <mat-form-field class="email" [formGroup]="formGroup">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+    <mat-form-field [formGroup]="formGroup">
+      <mat-label class="password">Password</mat-label>
+      <input matInput formControlName="password" type="password" />
+    </mat-form-field>
+  </div>
+  <mat-error *ngIf="hasError">User not found or wrong credentials</mat-error>
+  <button mat-raised-button class="login-button" (click)="onLoginClicked()">Login</button>
+
+  <div class="signup-wrapper">
+    <label>Dont have an account ?</label>
+    <a href="/signup">Signup now!</a>
+  </div>
+</div>

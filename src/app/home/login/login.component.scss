@@ -1,0 +1,21 @@
+.login-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.email {
+  margin-right: 10px;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+}
+
+.signup-wrapper {
+  margin-top: 10px;
+}
