@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ILoginDetails } from './../../models/ILoginDetails';
 import { LoginService } from './../../services/login.service';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +17,7 @@ export class LoginComponent implements OnInit {
   hasError: boolean = false;
 
   constructor(private formBuilder: FormBuilder,
+    private router: Router,
     private login: LoginService) {
     this.formGroup = this.formBuilder.group({
       email: new FormControl('', Validators.required),
@@ -32,7 +34,7 @@ export class LoginComponent implements OnInit {
     console.log('login:', email, password);
     this.login.login(email, password).subscribe((details:ILoginDetails) => {
       this.hasError = false;
-      console.log('moveTo home page ?');
+      this.router.navigate(['main']);
     }, err => {
       this.hasError = true;
       console.log('has Error', err);

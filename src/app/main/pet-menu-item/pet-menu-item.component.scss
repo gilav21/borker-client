@@ -1,0 +1,29 @@
+.pet-menu-item-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pet-picture {
+  border-radius: 50%;
+  border: none;
+  overflow: hidden;
+
+  .img {
+    width: 90%;
+    height: 90%;
+  }
+}
+
+
+.pet-name {
+  font-size: medium;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
