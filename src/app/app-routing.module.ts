@@ -1,3 +1,4 @@
+import { MainComponent } from './main/main.component';
 import { MyProfileComponent } from './my-profile/my-profile/my-profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SignupComponent } from './home/signup/signup.component';
@@ -13,7 +14,7 @@ const routes: Routes = [
     {path: 'myProfile', component: MyProfileComponent, canActivate: [AuthGuard], children: [
       // {path: '', component: }
     ]},
-    {path: 'main', component: SignupComponent, canActivate: [AuthGuard]},
+    {path: 'main', component: MainComponent, canActivate: [AuthGuard]},
   ]},
 ];
 
