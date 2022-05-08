@@ -1,12 +1,7 @@
 <div class="profile-wrapper">
   <div class="menu">
-    <p>first item</p>
-    <p>second item</p>
-    <p>third item</p>
+    <button mat-button class="add-pet-button" (click)="router.navigate(['myProfile/addPet'])">Add a pet</button>
   </div>
   <div class="content">
-    <p>bla bla bla</p>
-    <p>so much content...</p>
-    <p>very wow</p>
-  </div>
+    <router-outlet></router-outlet>
 </div>

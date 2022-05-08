@@ -1,3 +1,4 @@
+import { PipesModule } from './../pipes/pipes.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
@@ -6,12 +7,16 @@ import { PetMenuItemComponent } from './pet-menu-item/pet-menu-item.component';
 
 @NgModule({
   declarations: [
-    MainComponent,
     PetPageComponent,
-    PetMenuItemComponent
+    PetMenuItemComponent,
+    MainComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    PipesModule
+  ],
+  exports: [
+    PetMenuItemComponent
   ]
 })
 export class MainModule { }

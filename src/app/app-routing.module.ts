@@ -8,15 +8,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, children: [
-    {path: 'login', component: LoginComponent},
-    {path: 'signup', component: SignupComponent},
-    {path: 'myProfile', component: MyProfileComponent, canActivate: [AuthGuard], children: [
-      // {path: '', component: }
-    ]},
-    {path: 'main', component: MainComponent, canActivate: [AuthGuard]},
-    {path: '**', component: MainComponent, canActivate: [AuthGuard]},
-  ]},
+  {
+    path: '', component: HomeComponent, children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'signup', component: SignupComponent },
+      {
+        path: 'myProfile', component: MyProfileComponent, canActivate: [AuthGuard], children: [
+          { path: '', loadChildren: () => import('./my-profile/my-profile.module').then(m => m.MyProfileModule) }
+        ]
+      },
+      { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
+      { path: '**', component: MainComponent, canActivate: [AuthGuard] },
+    ]
+  },
 ];
 
 @NgModule({

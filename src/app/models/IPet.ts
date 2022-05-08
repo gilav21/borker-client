@@ -1,4 +1,5 @@
 export interface IPet {
   name: string,
-  imageUrl: string
+  owners: string[],
+  photos: string []
 }

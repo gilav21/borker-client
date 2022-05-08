@@ -1,0 +1,16 @@
+.pet-wrapper {
+  width: 200px;
+  height: 200px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.pet-wrapper:hover {
+  transform: scale(1.1);
+}
+
+.pets-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}

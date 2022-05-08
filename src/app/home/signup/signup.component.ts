@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { IUserDetails } from './../../models/ILoginDetails';
 import { Observable } from 'rxjs';
 import { LoginService } from './../../services/login.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -13,8 +15,11 @@ export class SignupComponent implements OnInit {
 
   formGroup: FormGroup;
   userNameMessage = '';
-
-  constructor(private formBuilder: FormBuilder, private loginService: LoginService) { }
+  emailMessage = '';
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+     private loginService: LoginService) { }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -27,12 +32,30 @@ export class SignupComponent implements OnInit {
   }
 
   testUserName(userName: string) {
-    this.loginService.checkUserName(userName).subscribe((result: { message: string }) => {
-      this.formGroup.controls['userName'].setErrors(null);
-      this.userNameMessage = result.message;
-    }, (err: { error: string }) => {
-      this.formGroup.controls['userName'].setErrors({notUniqe: true});
-      this.userNameMessage = err.error;
+    this.loginService.checkUserName(userName).subscribe({
+      next: (result: { message: string }) => {
+        console.log('next?');
+        this.formGroup.controls['userName'].setErrors(null);
+        this.userNameMessage = result.message;
+      }, error: (err: HttpErrorResponse) => {
+        console.log('error?');
+        this.formGroup.controls['userName'].setErrors({ notUniqe: true });
+        this.userNameMessage = err.error.error;
+      }
+    });
+  }
+
+  testEmail(email: string) {
+    this.loginService.checkEmail(email).subscribe({
+      next: (result: { message: string }) => {
+        console.log('next?');
+        this.formGroup.controls['email'].setErrors(null);
+        this.emailMessage = result.message;
+      }, error: (err: HttpErrorResponse) => {
+        console.log('error?');
+        this.formGroup.controls['email'].setErrors({ notUniqe: true });
+        this.emailMessage = err.error.error;
+      }
     });
   }
 
@@ -49,6 +72,7 @@ export class SignupComponent implements OnInit {
       this.loginService.login(user.email, formContent.password).subscribe(results => {
         console.log('logged in after signup!', results);
         // Navigate to home page
+        this.router.navigate(['/main'])
       }, err => {
         console.log('error while logging in after signup!', err);
       });

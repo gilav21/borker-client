@@ -91,4 +91,8 @@ export class LoginService {
     return this.http.get(this.env.CHECK_USERNAME + `?userName=${userName}`);
   }
 
+  checkEmail(email: string) {
+    return this.http.get(this.env.CHECK_EMAIL + `?email=${email}`);
+  }
+
 }

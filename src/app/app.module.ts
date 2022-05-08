@@ -1,3 +1,4 @@
+import { MainModule } from './main/main.module';
 import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
 import { MaterialModule } from './material/material.module';

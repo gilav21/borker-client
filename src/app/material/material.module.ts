@@ -5,6 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -15,7 +18,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatTooltipModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule
   ],
   exports: [
     MatMenuModule,
@@ -23,6 +29,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatTooltipModule,
     MatInputModule,
     MatFormFieldModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule
   ]
 })
 export class MaterialModule { }

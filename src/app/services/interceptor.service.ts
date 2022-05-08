@@ -40,7 +40,9 @@ export class InterceptorService implements HttpInterceptor {
   shouldAttemptJwtTokenInjection(req: HttpRequest<any>): boolean {
     const blackList = [
       this.env.LOGIN,
-      this.env.SIGNUP
+      this.env.SIGNUP,
+      this.env.CHECK_USERNAME,
+      this.env.CHECK_EMAIL
     ]
 
     for (let i = 0; i < blackList.length; i++) {

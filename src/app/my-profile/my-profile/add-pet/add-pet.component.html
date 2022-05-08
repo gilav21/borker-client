@@ -1,0 +1,28 @@
+<div class="add-pet-form">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [formControl]="nameControl" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Owners</mat-label>
+    <mat-chip-list #chipList multiple>
+      <mat-chip *ngFor="let owner of owners" [value]="owner" (removed)="removeOwner(owner)">
+        {{owner.firstName}} {{owner.lastName}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="Add Owner..."
+      #ownerInput
+      [matChipInputFor]="chipList"
+      [matAutocomplete]="auto"
+      [formControl]="ownerControl">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let owner of autoCompleteOwners" [value]="owner">
+          {{owner.firstName}} {{owner.lastName}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-chip-list>
+  </mat-form-field>
+  <button mat-raised-button (click)="onAddClicked()">Add Pet</button>
+</div>
