@@ -1,3 +1,26 @@
 <div class="pet-page-wrapper">
 
+  <div class="header-wrapper">
+    <img class="header-photo" [src]="profilePhoto? (profilePhoto | secure | async): null">
+    <div class="pet-page-desc">
+      <p>{{pet?.description}}</p>
+    </div>
+  </div>
+  <mat-tab-group>
+    <mat-tab label="Photos">
+      <div class="pet-page-photos">
+        <app-photos-view [photos]="petPhotos" [pet]="pet" [isViewOnly]="true"></app-photos-view>
+      </div>
+    </mat-tab>
+    <mat-tab label="Pet Activities">
+      <h2>Pet Activities</h2>
+    </mat-tab>
+    <mat-tab label="Pee and Poo">
+      <app-pee-and-poo-list [petId]="pet?._id"></app-pee-and-poo-list>
+    </mat-tab>
+    <mat-tab label="Medical Tracking">
+      <h2>Medical Tracking</h2>
+    </mat-tab>
+  </mat-tab-group>
+
 </div>

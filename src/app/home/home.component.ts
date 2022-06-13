@@ -16,13 +16,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit(): void {
-    // this.subscriptions.push(this.loginService.isLoggedIn$.subscribe((isLogged: boolean) => {
-    //   if (isLogged) {
-    //     this.router.navigate(['/main']);
-    //   } else {
-    //     this.router.navigate(['/login']);
-    //   }
-    // }));
   }
 
   ngOnDestroy(): void {

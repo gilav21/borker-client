@@ -1,0 +1,25 @@
+<ng-container *ngIf="isReadOnly; else edit">
+  <div class="entry-wrapper view-wrapper">
+    <label class="centered-label">{{peeAndPoo?.description}}</label>
+    <label class="centered-label">{{peeAndPoo?.createdAt | date: "dd/MM/YYYY HH:mm"}}</label>
+    <app-quality-selector [formGroup]="formGroup" [isReadOnly]="true"></app-quality-selector>
+    <div class="map-marker"><fa-icon class="map-marker-icon" [icon]="mapMarkerIcon" (click)="onOpenMap()"></fa-icon></div>
+  </div>
+</ng-container>
+
+<ng-template #edit>
+  <div class="entry-wrapper edit-wrapper">
+    <mat-form-field [formGroup]="formGroup">
+      <textarea matInput formControlName="description" placeholder="Description"></textarea>
+    </mat-form-field>
+    <div class="quality-type-picker" [formGroup]="formGroup">
+      <mat-radio-group class="radio-group-control" formControlName="type">
+        <mat-radio-button value="Pee">Pee</mat-radio-button>
+        <mat-radio-button value="Poo">Poo</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <app-quality-selector *ngIf="showQualitySelector" [formGroup]="formGroup" [isReadOnly]="false"></app-quality-selector>
+    <!-- <app-upload-photos></app-upload-photos> -->
+    <button *ngIf="!isReadOnly" mat-raised-button [disabled]="formGroup.invalid" (click)="onSaveEntry()">Save</button>
+  </div>
+</ng-template>

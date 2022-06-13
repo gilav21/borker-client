@@ -1,0 +1,35 @@
+<div *ngIf="type === 'Pee'; else poo" [formGroup]="formGroup" class="quality-wrapper">
+  <mat-radio-group class="flex" formControlName="quality" [disabled]="isReadOnly">
+    <mat-radio-button [disableRipple]="true" value="bad"><img class="quality-image"
+        src="assets/images/sick_poop.png"></mat-radio-button>
+    <!-- <mat-radio-button [disableRipple]="true" value="bad"><img class="quality-image"
+        src="assets/images/defaultAvatar.png"></mat-radio-button> -->
+    <mat-radio-button [disableRipple]="true" value="neutral"><img class="quality-image"
+        src="assets/images/neutral_poop.png"></mat-radio-button>
+    <!-- <mat-radio-button [disableRipple]="true" value="neutral"><img class="quality-image"
+        src="assets/images/defaultAvatar.png"></mat-radio-button> -->
+    <mat-radio-button [disableRipple]="true" value="good"><img class="quality-image"
+        src="assets/images/happy_poop.png"></mat-radio-button>
+    <!-- <mat-radio-button [disableRipple]="true" value="good"><img class="quality-image"
+        src="assets/images/defaultAvatar.png"></mat-radio-button> -->
+  </mat-radio-group>
+</div>
+
+<ng-template #poo>
+  <div [formGroup]="formGroup" class="quality-wrapper">
+    <mat-radio-group class="flex" formControlName="quality" [disabled]="isReadOnly">
+      <mat-radio-button [disableRipple]="true" value="bad"><img class="quality-image"
+        src="assets/images/sick_poop.png"></mat-radio-button>
+      <!-- <mat-radio-button [disableRipple]="true" value="bad"><img class="quality-image"
+          src="assets/images/defaultAvatar.png"></mat-radio-button> -->
+      <mat-radio-button [disableRipple]="true" value="neutral"><img class="quality-image"
+            src="assets/images/neutral_poop.png"></mat-radio-button>
+      <!-- <mat-radio-button [disableRipple]="true" value="neutral"><img class="quality-image"
+          src="assets/images/defaultAvatar.png"></mat-radio-button> -->
+      <mat-radio-button [disableRipple]="true" value="good"><img class="quality-image"
+            src="assets/images/happy_poop.png"></mat-radio-button>
+      <!-- <mat-radio-button [disableRipple]="true" value="good"><img class="quality-image"
+          src="assets/images/defaultAvatar.png"></mat-radio-button> -->
+    </mat-radio-group>
+  </div>
+</ng-template>

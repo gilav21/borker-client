@@ -1,0 +1,16 @@
+<div class="list-wrapper">
+  <div class="controls">
+    <button mat-raised-button (click)="onAddEntry()">Add Entry</button>
+    <button mat-button><div class="sort-button" (click)="toggleSort()"><label>Date</label><fa-icon [ngClass]="{'flipped': sortingDirection !== -1}" [icon]="sortDescIcon"></fa-icon></div></button>
+  </div>
+  <div class="list-content">
+    <div class="editing-entry" *ngIf="isAdding">
+      <app-pee-and-poo-entry [isReadOnly]="false" [petId]="petId" (entryCreated)="onEntryCreated($event)">
+      </app-pee-and-poo-entry>
+    </div>
+    <div class="entry-wrapper" *ngFor="let peeAndPoo of peeAndPoops">
+      <app-pee-and-poo-entry [peeAndPoo]="peeAndPoo" [disabled]="isAdding">
+      </app-pee-and-poo-entry>
+    </div>
+  </div>
+</div>

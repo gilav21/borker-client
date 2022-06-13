@@ -1,0 +1,30 @@
+.pet-page-wrapper {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 20% 80%;
+}
+
+.header-wrapper {
+  padding-top: 10px;
+  padding-left: 10px;
+  display: flex;
+}
+
+.header-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.pet-page-desc {
+  display: flex;
+  justify-content: center;
+  min-height: 60px;
+
+  p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}

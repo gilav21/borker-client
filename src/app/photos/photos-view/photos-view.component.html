@@ -1,0 +1,8 @@
+<div class="photos-wrapper">
+  <div class="photo-row" *ngFor="let photo of photos; let index= index" (mouseenter)="hoveredPhoto = photo"
+    (mouseleave)="hoveredPhoto = null" (click)="openPhotoDialog(index)">
+    <mat-icon class="remove-photo" *ngIf="hoveredPhoto === photo && !isViewOnly" (click)="photoRemoved.emit(index)">cancel</mat-icon>
+    <img class="photo" [src]="photo.filePath | secure | async">
+    <label class="photo-label">{{photo.name}}</label>
+  </div>
+</div>

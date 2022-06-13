@@ -1,0 +1,12 @@
+<div class="dialog-main-wrapper">
+  <div class="dialog-wrapper">
+    <fa-icon class="arrow left" [icon]="leftIcon" (click)="onActionClicked('prev')" [class.disabled]="isFirst">
+    </fa-icon>
+    <img class="photo" [src]="photoUrl | secure | async">
+    <fa-icon class="arrow right" [icon]="rightIcon" (click)="onActionClicked('next')" [class.disabled]="isLast">
+    </fa-icon>
+  </div>
+  <div class="dialog-details">
+    <app-photo-details [pet]="pet"></app-photo-details>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 <div class="header-wrapper">
-  <!-- <img class="logo" src="assets/images/paw.jpg"/> -->
-  <app-my-photo (photoClicked)="onPhotoClicked()"></app-my-photo>
-  <h1 class="title">Header</h1>
+  <div class="header-left">
+    <app-my-photo (photoClicked)="onPhotoClicked()"></app-my-photo>
+    <h1 class="header-logo" (click)="onLogoClicked()">Borker Logo</h1>
+  </div>
   <app-menu></app-menu>
 </div>

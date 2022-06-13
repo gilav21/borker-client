@@ -19,9 +19,15 @@ export class EnviromentService {
 
   // Pets
   readonly PETS_API = this.WEB_API + 'pets/';
+  readonly PET_BY_ID = this.PETS_API + 'pet/';
   readonly PET_IMAGES = this.PETS_API + 'petImages';
   readonly ADD_PET = this.PETS_API + 'createPet';
   readonly PETS_BY_USER_ID = this.PETS_API + 'petsByUserId';
   readonly GET_PET_IMAGE = this.PETS_API + 'petImage/';
+  readonly SET_PET_PROFILE_PHOTO = this.PETS_API + 'changeProfileImage';
+
+  // Pee and poo
+  readonly PEE_AND_POO_API = this.WEB_API + 'peeAndPoo/';
+  readonly CREATE_PEE_AND_POO = this.PEE_AND_POO_API + 'createPeeAndPoo';
 }
 

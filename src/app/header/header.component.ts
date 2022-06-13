@@ -18,4 +18,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['myProfile']);
   }
 
+  onLogoClicked() {
+    this.router.navigate(['main']);
+  }
+
 }

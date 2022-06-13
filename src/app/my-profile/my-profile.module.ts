@@ -1,3 +1,4 @@
+import { PhotosModule } from './../photos/photos.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './../material/material.module';
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
-    MyProfileRoutingModule
+    MyProfileRoutingModule,
+    PhotosModule
   ],
   exports: [
     MyPhotoComponent

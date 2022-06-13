@@ -16,10 +16,14 @@ export class AddPetComponent implements OnInit {
 
   formGroup: FormGroup;
   ownerControl = new FormControl();
-  nameControl = new FormControl();
+  nameControl = new FormControl('', Validators.required);
+  descControl = new FormControl('', Validators.required);
   autoCompleteOwners: IUserDetails[] = [];
   owners: IUserDetails[] = [];
+  photos: File[] = [];
 
+
+  isFormValid = false;
 
   @ViewChild('ownerInput') ownerInput;
 
@@ -27,6 +31,10 @@ export class AddPetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.nameControl.valueChanges.subscribe(val => {
+      this.checkIsValid();
+    });
+
     this.ownerControl.valueChanges.subscribe(val => {
       this.mainService.getUsersBy(val).subscribe((results: { message: string, users: IUserDetails[] }) => {
         this.autoCompleteOwners = results.users;
@@ -39,31 +47,63 @@ export class AddPetComponent implements OnInit {
     if (index !== -1) {
       this.owners.splice(index, 1);
     }
+    this.checkIsValid();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     const ownerName = event.option.viewValue;
     this.owners.push(this.autoCompleteOwners.find(owner => `${owner.firstName} ${owner.lastName}` === ownerName));
     this.ownerControl.setValue(null);
-    this.ownerInput.nativeElement.value ='';
+    this.ownerInput.nativeElement.value = '';
+    this.checkIsValid();
   }
 
   onAddClicked() {
     const newPet: IPet = {
       name: this.nameControl.value,
       owners: this.owners.map(owner => owner._id),
-      photos: []
+      photos: [],
+      profilePhoto: '',
+      description: this.descControl.value
     };
     this.mainService.addPet(newPet).subscribe({
-      next: results => {
+      next: (results: any) => {
         console.log('Pet added');
-        this.router.navigate(['main']);
+        if (this.photos.length > 0) {
+          this.mainService.uploadPetImages(results.petId, this.photos).subscribe({
+            next: photos => {
+              console.log('Photos added', photos);
+              this.mainService.changeProfileImage(results.petId, photos[0]);
+              this.router.navigate(['main']);
+            },
+            error: err => {
+              console.error('Got an error while uploading photos', err);
+            }
+          });
+        } else {
+          this.router.navigate(['main']);
+        }
       },
       error: err => {
         console.error('Error while adding pet', err);
         err.message;
       }
     });
+  }
+
+  checkIsValid() {
+    this.isFormValid = this.nameControl.valid && this.owners && this.owners.length > 0;
+  }
+
+  onPhotoAdded(photo: File) {
+    this.photos.push(photo);
+  }
+
+  onPhotoRemoved(photo: File) {
+    const index = this.photos.indexOf(photo);
+    if (index !== -1) {
+      this.photos.splice(index, 1);
+    }
   }
 
 }

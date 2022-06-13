@@ -1,3 +1,5 @@
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { EnviromentService } from './enviroment.service';
 import { LoginService } from './login.service';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
@@ -14,7 +16,7 @@ export class InterceptorService implements HttpInterceptor {
 
   token: string;
 
-  constructor(private login: LoginService, private jwtHelper: JwtHelperService, private env: EnviromentService) { }
+  constructor(private dialog: MatDialog,private login: LoginService, private jwtHelper: JwtHelperService, private env: EnviromentService, private router: Router) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Skip requests that do not need a JWT token.
@@ -24,14 +26,16 @@ export class InterceptorService implements HttpInterceptor {
     this.token = this.login.loginDetails.token;
     if (this.token) {
       if (!this.jwtHelper.isTokenExpired(this.token)) {
+        this.login.resetIdleCounter();
         const tokenizedReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + this.token) });
         return next.handle(tokenizedReq);
       } else {
-        this.login.renewToken(this.token).subscribe((results: any) => {
-          this.token = results.token;
-          const tokenizedReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + this.token) });
-          return next.handle(tokenizedReq);
-        });
+        if (this.login.getLoginStatus()) {
+          this.login.renewToken();
+        } else {
+          this.dialog.closeAll();
+          this.router.navigate(['/login']);
+        }
       }
     }
     return next.handle(req);

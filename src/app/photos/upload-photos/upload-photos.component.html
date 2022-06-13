@@ -1,0 +1,17 @@
+<div class="upload-wrapper">
+  <button class="input-wrapper" mat-raised-button (click)="fileInput.click()">
+    <span>Choose images</span>
+    <input #fileInput type="file" accept="image/*" [multiple]="!singlePhoto" style="display: none;"
+      (change)="onFileInput($event)" />
+  </button>
+
+  <app-photos-view [photos]="photos"></app-photos-view>
+  <!-- <div class="photos-wrapper">
+    <div class="photo-row" *ngFor="let photo of photos; let index= index" (mouseenter)="hoveredPhoto = photo"
+      (mouseleave)="hoveredPhoto = null">
+      <mat-icon class="remove-photo" *ngIf="hoveredPhoto === photo" (click)="onRemovePhoto(index)">cancel</mat-icon>
+      <img class="photo" [src]="photo.filePath">
+      <label class="photo-label">{{photo.file.name}}</label>
+    </div>
+  </div> -->
+</div>

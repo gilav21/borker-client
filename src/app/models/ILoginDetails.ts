@@ -10,4 +10,5 @@ export interface IUserDetails {
   userName: string,
   firstName: string,
   lastName: string
+  createdAt?: string
 }

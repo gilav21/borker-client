@@ -1,0 +1,40 @@
+.list-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 10px;
+}
+
+.list-content {
+  display: flex;
+  flex-direction: column;
+  flex: 0.9;
+  overflow: auto;
+}
+
+.sort-button {
+  display: flex;
+  gap: 5px;
+}
+
+.flipped {
+  transform: rotate(180deg);
+}
+
+.editing-entry {
+}
+
+.controls {
+  display: flex;
+  column-gap: 10px;
+  flex: 0.1;
+  margin-left: 10px;
+}
+
+.entry-wrapper {
+  max-height: 80px;
+  border: 1px solid;
+  border-radius: 10px;
+  margin: 0 10px 5px 10px;
+  padding-top: 5px;
+}

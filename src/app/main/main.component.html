@@ -1,5 +1,5 @@
 <div class="pets-wrapper">
-  <div class="pet-wrapper" *ngFor="let pet of pets">
+  <div class="pet-wrapper" *ngFor="let pet of pets" (click)="onPetClicked(pet)">
     <app-pet-menu-item [pet]="pet">
     </app-pet-menu-item>
   </div>

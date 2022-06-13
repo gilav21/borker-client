@@ -24,5 +24,13 @@
       </mat-autocomplete>
     </mat-chip-list>
   </mat-form-field>
-  <button mat-raised-button (click)="onAddClicked()">Add Pet</button>
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea #descInput matInput [maxLength]="250" [formControl]="descControl"></textarea>
+    <mat-hint>{{descInput.value.length}}/250</mat-hint>
+  </mat-form-field>
+  <app-upload-photos (photoAdded)="onPhotoAdded($event)" (photoRemoved)="onPhotoRemoved($event)"></app-upload-photos>
+  <button class="sumbit-button" mat-raised-button (click)="onAddClicked()"
+  [disabled]="!isFormValid"
+  >Add Pet</button>
 </div>

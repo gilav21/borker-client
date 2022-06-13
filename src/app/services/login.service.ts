@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { IUserDetails } from './../models/ILoginDetails';
 import { EnviromentService } from './enviroment.service';
 import { HttpClient } from '@angular/common/http';
@@ -12,6 +13,9 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 export class LoginService {
 
   private _loginDetails: ILoginDetails;
+  private idleTimer;
+  private logoutTime: number = 1000* 60 * 30;
+
 
   get loginDetails(): ILoginDetails {
     return this._loginDetails;
@@ -35,7 +39,7 @@ export class LoginService {
     return this._isLoggedIn$.value;
   }
 
-  constructor(private http: HttpClient, private env: EnviromentService, private jwtHelper: JwtHelperService) {
+  constructor(private http: HttpClient, private env: EnviromentService, private jwtHelper: JwtHelperService, private router: Router) {
     const token = localStorage.getItem('token');
     if (!jwtHelper.isTokenExpired(token?.toString())) {
       const expiresString = localStorage.getItem('expriesIn');
@@ -46,6 +50,19 @@ export class LoginService {
       }
       this.setIsLoggedIn$(true);
     }
+    this.resetIdleCounter();
+  }
+
+  resetIdleCounter() {
+    console.log('resetting idle counter');
+    if (this.idleTimer) {
+      clearTimeout(this.idleTimer)
+    }
+    this.idleTimer = setTimeout(()=> {
+      console.log('idle timedout');
+      this.setIsLoggedIn$(false);
+      this.router.navigate(['/login']);
+    },this.logoutTime );
   }
 
   login(email: string, password: string) {
@@ -76,11 +93,18 @@ export class LoginService {
     return this.http.post(this.env.SIGNUP, body);
   }
 
-  renewToken(oldToken: string) {
+  renewToken() {
     const body = {
-      token: oldToken
+      token: this._loginDetails.token
     }
-    return this.http.post(this.env.RENEW_TOKEN, body);
+    this.http.post(this.env.RENEW_TOKEN, body).subscribe({
+      next: (results: {token: string})=> {
+        this._loginDetails.token = results.token;
+      },
+      error: err=> {
+        this.router.navigate(['/login']);
+      }
+    })
   }
 
   tokenTest() {

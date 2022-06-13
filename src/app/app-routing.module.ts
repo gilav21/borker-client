@@ -1,3 +1,4 @@
+import { PetPageComponent } from './main/pet-page/pet-page.component';
 import { MainComponent } from './main/main.component';
 import { MyProfileComponent } from './my-profile/my-profile/my-profile.component';
 import { AuthGuard } from './guards/auth.guard';
@@ -17,7 +18,8 @@ const routes: Routes = [
           { path: '', loadChildren: () => import('./my-profile/my-profile.module').then(m => m.MyProfileModule) }
         ]
       },
-      { path: 'main', component: MainComponent, canActivate: [AuthGuard] },
+      { path: 'main', component: MainComponent, canActivate: [AuthGuard]},
+      { path: 'petPage/:petId', component: PetPageComponent, canActivate: [AuthGuard]},
       { path: '**', component: MainComponent, canActivate: [AuthGuard] },
     ]
   },
