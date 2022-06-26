@@ -1,0 +1,9 @@
+<div class="comment-wrapper">
+  <div class="comment-header">
+    <img class="img" [src]="profilePhoto | secure | async">
+    <label class="name-label">{{comment.userId.firstName}} {{comment.userId.lastName}}</label>
+  </div>
+  <div class="comment-content">
+    <label>{{comment.comment}}</label>
+  </div>
+</div>

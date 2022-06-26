@@ -30,12 +30,14 @@ export class InterceptorService implements HttpInterceptor {
         const tokenizedReq = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + this.token) });
         return next.handle(tokenizedReq);
       } else {
-        if (this.login.getLoginStatus()) {
-          this.login.renewToken();
-        } else {
+        // if (this.login.getLoginStatus()) {
+        //   this.login.renewToken();
+        // } else {
+        //   this.dialog.closeAll();
+        //   this.router.navigate(['/login']);
+        // }
           this.dialog.closeAll();
           this.router.navigate(['/login']);
-        }
       }
     }
     return next.handle(req);

@@ -1,0 +1,25 @@
+.comments-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.new-comment {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-comment-input {
+  border: 1px solid;
+  border-radius: 10px;
+  margin-right: 5px;
+  padding: 5px;
+  resize: none;
+  height: 80px;
+}

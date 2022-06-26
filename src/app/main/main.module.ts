@@ -2,7 +2,7 @@ import { PeeAndPooModule } from './../pee-and-poo/pee-and-poo.module';
 import { MaterialModule } from './../material/material.module';
 import { PipesModule } from './../pipes/pipes.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MainComponent } from './main.component';
 import { PetPageComponent } from './pet-page/pet-page.component';
 import { PetMenuItemComponent } from './pet-menu-item/pet-menu-item.component';

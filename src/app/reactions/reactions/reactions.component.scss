@@ -1,0 +1,19 @@
+.icons-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.icon {
+  font-size: 30px;
+  cursor: pointer;
+  background: #ffff42;
+  border-radius: 50%;
+}
+
+.icon:hover {
+  transform: scale(1.5);
+}
+
+.selected {
+  box-shadow: #ffff42 0 0 8px 7px;
+}

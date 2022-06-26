@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PetPageComponent implements OnInit {
 
   pet: IPet;
-  petPhotos: { filePath: string, name: string, file?: File }[] = [];
+  petPhotos: { photoId: string, name: string, file?: File }[] = [];
   profilePhoto: string;
   constructor(private env: EnviromentService, private activatedRoute: ActivatedRoute, private mainService: MainService) { }
 
@@ -25,7 +25,7 @@ export class PetPageComponent implements OnInit {
             this.pet = pet.pet;
             if (this.pet.photos && this.pet.photos.length > 0) {
               this.petPhotos = this.pet.photos.map(photo => {
-                return { filePath: this.env.GET_PET_IMAGE + photo, name: '' }
+                return { photoId: photo, name: '' }
               });
               this.profilePhoto = this.env.GET_PET_IMAGE + (this.pet.profilePhoto? this.pet.profilePhoto : this.pet.photos[0]);
             }

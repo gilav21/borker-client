@@ -29,5 +29,11 @@ export class EnviromentService {
   // Pee and poo
   readonly PEE_AND_POO_API = this.WEB_API + 'peeAndPoo/';
   readonly CREATE_PEE_AND_POO = this.PEE_AND_POO_API + 'createPeeAndPoo';
+
+  // Photos
+  readonly PHOTOS_API = this.WEB_API + 'photos/';
+  readonly ADD_PHOTO_REACTION = this.PHOTOS_API + 'addReaction';
+  readonly ADD_PHOTO_COMMENT = this.PHOTOS_API + 'addComment';
+
 }
 

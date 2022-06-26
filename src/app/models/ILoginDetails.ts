@@ -9,6 +9,7 @@ export interface IUserDetails {
   email: string,
   userName: string,
   firstName: string,
-  lastName: string
+  lastName: string,
+  profilePhoto?: string,
   createdAt?: string
 }

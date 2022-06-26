@@ -1,5 +1,10 @@
 <div class="details-wrapper">
   <div class="description">{{pet?.description}}</div>
-  <div class="reactions">Reactions will go here</div>
-  <div class="comments">Comments will go here</div>
+  <div class="reactions">
+    <app-reactions [selectedIndex]="usersReactionIndex" (reactionSelected)="onReactionSelected($event)"></app-reactions>
+  </div>
+  <div class="comments">
+    <!-- <p *ngFor="let comment of photo?.comments">{{comment.comment}}</p> -->
+    <app-comments [comments]="photo?.comments"></app-comments>
+  </div>
 </div>

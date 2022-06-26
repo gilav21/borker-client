@@ -1,3 +1,5 @@
+import { CommentsModule } from './../comments/comments.module';
+import { ReactionsModule } from './../reactions/reactions.module';
 import { PhotosService } from './photos.service';
 import { PipesModule } from './../pipes/pipes.module';
 import { MaterialModule } from './../material/material.module';
@@ -22,7 +24,9 @@ import { PhotoDetailsComponent } from './photo-details/photo-details.component';
     CommonModule,
     MaterialModule,
     PipesModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ReactionsModule,
+    CommentsModule
   ],
   exports: [
     UploadPhotosComponent,

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactionsComponent } from './reactions/reactions.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -9,7 +10,11 @@ import { ReactionsComponent } from './reactions/reactions.component';
     ReactionsComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule
+  ],
+  exports: [
+    ReactionsComponent
   ]
 })
 export class ReactionsModule { }
