@@ -54,7 +54,7 @@ export class PhotosService {
   addPhotoReaction(photoId: string, reaction: ReactionTypes) {
     const body = {
       photoId,
-      reaction
+      reaction: ReactionTypes[reaction]
     }
     this.http.post<{ message: string, reaction: IReaction }>(this.env.ADD_PHOTO_REACTION, body).subscribe(results => {
       this.store.dispatch(BorkerActions.setCurrentPhotoReaction({reactionType: reaction}));
