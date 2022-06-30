@@ -1,9 +1,9 @@
 <div class="dialog-main-wrapper">
   <div class="dialog-wrapper">
-    <fa-icon class="arrow left" [icon]="leftIcon" (click)="onActionClicked('prev')" [class.disabled]="isFirst">
+    <fa-icon class="arrow left" [icon]="leftIcon" [class.disabled]="isFirst$ | async">
     </fa-icon>
     <img class="photo" [src]="photoUrl$ | async | secure | async">
-    <fa-icon class="arrow right" [icon]="rightIcon" (click)="onActionClicked('next')" [class.disabled]="isLast">
+    <fa-icon class="arrow right" [icon]="rightIcon" [class.disabled]="isLast$ | async">
     </fa-icon>
   </div>
   <div class="dialog-details">

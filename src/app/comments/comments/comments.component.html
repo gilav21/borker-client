@@ -2,7 +2,7 @@
   <div class="new-comment">
     <textarea #commentInput class="new-comment-input" matInput [attr.maxlength]="inputMaxLength" (input)="onValueChanged(commentInput.value)"></textarea>
     <mat-hint>{{commentInput.value.length}}/{{inputMaxLength}}</mat-hint>
-    <button mat-raised-button (click)="onSaveComment()" [disabled]="isEmpty">Post</button>
+    <button mat-raised-button (click)="commentInput.value = ''; onSaveComment()" [disabled]="isEmpty">Post</button>
   </div>
   <div class="comments-list">
     <app-comment class="comment" *ngFor="let comment of comments" [comment]="comment"(removeComment)="onRemoveComment(comment)" ></app-comment>

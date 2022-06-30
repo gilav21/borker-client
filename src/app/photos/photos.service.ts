@@ -1,3 +1,4 @@
+import { addCurrentPhotoComment } from './../redux/borker.actions';
 import { IComment } from './../models/IComment';
 import { IReaction, ReactionTypes } from './../models/IReaction';
 import { EnviromentService } from 'src/app/services/enviroment.service';
@@ -67,6 +68,7 @@ export class PhotosService {
       reactionId
     }
     this.http.post<{ message: string }>(this.env.DELETE_PHOTO_REACTION, body).subscribe(results => {
+      this.store.dispatch(BorkerActions.setCurrentPhotoReaction({reactionType: null}));
     });
   }
 
@@ -86,7 +88,7 @@ export class PhotosService {
       comment
     }
     this.http.post<{ message: string, comment: IComment }>(this.env.ADD_PHOTO_COMMENT, body).subscribe(results => {
-      this.getPhoto(photoId);
+      this.store.dispatch(BorkerActions.addCurrentPhotoComment({comment: results.comment}));
     });
   }
 }

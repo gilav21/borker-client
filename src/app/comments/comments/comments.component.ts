@@ -38,6 +38,7 @@ export class CommentsComponent implements OnInit {
 y
   onSaveComment() {
     this.newComment.emit(this.newCommentContent);
+    this.isEmpty = true;
   }
 
   onRemoveComment(comment: IComment) {

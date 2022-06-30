@@ -79,3 +79,14 @@ export const selectCurrentPhoto =
     console.log('select photo url :', currentPhoto);
     return environment.GET_PET_IMAGE +  currentPhoto._id;
   });
+
+
+  export const selectIsFirstPhoto = createSelector(selectCurrentPhotoIndex, (index) => {
+    console.log('select is first photo :', index);
+    return index === 0;
+  });
+
+  export const selectIsLastPhoto = createSelector(selectCurrentPhotoIndex, selectPetPhotos, (index, photos) => {
+    console.log('select is last photo :', index);
+    return index === (photos.length - 1);
+  });

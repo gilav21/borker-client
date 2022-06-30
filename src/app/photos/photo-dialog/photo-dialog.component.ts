@@ -17,8 +17,12 @@ import { Store } from '@ngrx/store';
 })
 export class PhotoDialogComponent implements OnInit {
 
+
   isFirst: boolean;
   isLast: boolean;
+
+  isFirst$: Observable<boolean>;
+  isLast$: Observable<boolean>;
 
   photo$: Observable<IPhoto>;
   pet$: Observable<IPet>;
@@ -32,35 +36,39 @@ export class PhotoDialogComponent implements OnInit {
     private store: Store<any>,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.photo$ = this.store.select(BorkerSelectors.selectCurrentPhoto);
     this.pet$ = this.store.select(BorkerSelectors.selectCurrentPet);
+    this.photoUrl$ = this.store.select(BorkerSelectors.selectCurrentPhotoUrl);
+    this.isFirst$ = this.store.select(BorkerSelectors.selectIsFirstPhoto);
+    this.isLast$ = this.store.select(BorkerSelectors.selectIsLastPhoto);
     this.leftIcon = faArrowLeft;
     this.rightIcon = faArrowRight;
-    const photoId = this.data.photoId;
-    this.photoUrl$ = this.store.select(BorkerSelectors.selectCurrentPhotoUrl);
-    this.isFirst = this.data.isFirst;
-    this.isLast = this.data.isLast;
 
+    this.isFirst$.subscribe(isFirst => {
+      this.isFirst = isFirst;
+    });
+    this.isLast$.subscribe(isLast => {
+      this.isLast = isLast;
+    });
   }
 
   @HostListener('document:keydown', ['$event']) onKeyDown(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'ArrowLeft':
-        if (!this.isFirst) {
-          this.onActionClicked('prev');
-        }
-        break;
-      case 'ArrowRight':
-        if (!this.isLast) {
-          this.onActionClicked('next');
-        }
-        break;
+    if (document.activeElement.tagName !== 'TEXTAREA') {
+      switch (event.key) {
+        case 'ArrowLeft':
+          if (!this.isFirst) {
+            // this.onActionClicked('prev');
+            this.store.dispatch(BorkerActions.prevPhoto());
+          }
+          break;
+        case 'ArrowRight':
+          if (!this.isLast) {
+            // this.onActionClicked('next');
+            this.store.dispatch(BorkerActions.nextPhoto());
+          }
+          break;
+      }
     }
-
-  }
-
-  onActionClicked(action) {
-    this.dialogRef.close(action);
   }
 }

@@ -1,3 +1,4 @@
+import { IComment } from 'src/app/models/IComment';
 import { ReactionTypes } from './../models/IReaction';
 import { IUserDetails } from '../models/ILoginDetails';
 import { IPet } from '../models/IPet';
@@ -69,3 +70,17 @@ export const setCurrentPhotoReaction = createAction(
   '[Pet] Set Current Photo Reaction',
   props<{ reactionType: ReactionTypes }>()
 );
+
+export const addCurrentPhotoComment = createAction(
+  '[Pet] Add Current Photo Comment',
+  props<{ comment: IComment }>()
+);
+
+export const prevPhoto = createAction(
+  '[Pet] Decrements Current Photo Index'
+)
+
+export const nextPhoto = createAction(
+  '[Pet] Increment Current Photo Index'
+)
+

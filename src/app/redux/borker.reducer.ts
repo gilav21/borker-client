@@ -79,7 +79,7 @@ export const borkerReducer = createReducer(initialBorkerState,
     if (reactionIndex > -1) {
       return {
         ...state,
-        currentPet : {
+        currentPet: {
           ...state.currentPet,
           photos: [
             ...state.currentPet.photos.slice(0, state.currentPhotoIndex),
@@ -91,17 +91,69 @@ export const borkerReducer = createReducer(initialBorkerState,
                   ...state.currentPet.photos[state.currentPhotoIndex].reactions[reactionIndex],
                   type: ReactionTypes[action.reactionType]
                 },
-                ...state.currentPet.photos[state.currentPhotoIndex].reactions.slice(reactionIndex),
+                ...state.currentPet.photos[state.currentPhotoIndex].reactions.slice(reactionIndex + 1),
               ]
 
             },
-            ...state.currentPet.photos.slice(state.currentPhotoIndex),
+            ...state.currentPet.photos.slice(state.currentPhotoIndex + 1),
+          ]
+        }
+      }
+    } else {
+      return {
+        ...state,
+        currentPet: {
+          ...state.currentPet,
+          photos: [
+            ...state.currentPet.photos.slice(0, state.currentPhotoIndex),
+            {
+              ...state.currentPet.photos[state.currentPhotoIndex],
+              reactions: [
+                {
+                  userId: state.user,
+                  type: ReactionTypes[action.reactionType]
+                },
+              ]
+
+            },
+            ...state.currentPet.photos.slice(state.currentPhotoIndex + 1),
           ]
         }
       }
     }
-
     return state;
+  }),
+  on(BorkerActions.addCurrentPhotoComment, (state, action) => {
+    action.comment;
+    return {
+      ...state,
+      currentPet: {
+        ...state.currentPet,
+        photos: [
+          ...state.currentPet.photos.slice(0, state.currentPhotoIndex),
+          {
+            ...state.currentPet.photos[state.currentPhotoIndex],
+            comments: [
+              ...state.currentPet.photos[state.currentPhotoIndex].comments,
+              action.comment
+            ]
+          },
+          ...state.currentPet.photos.slice(state.currentPhotoIndex + 1),
+        ]
+      }
+    }
+  }),
+  on(BorkerActions.prevPhoto, (state) => {
+    return {
+      ...state,
+      currentPhotoIndex: state.currentPhotoIndex - 1
+    }
+  }),
+  on(BorkerActions.nextPhoto, (state) => {
+    return {
+      ...state,
+      currentPhotoIndex: state.currentPhotoIndex + 1
+    }
   }),
 );
 
