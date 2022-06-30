@@ -1,10 +1,9 @@
 <div class="details-wrapper">
-  <div class="description">{{pet?.description}}</div>
+  <div class="description">{{(pet$ | async)?.description}}</div>
   <div class="reactions">
-    <app-reactions [selectedIndex]="usersReactionIndex" (reactionSelected)="onReactionSelected($event)"></app-reactions>
+    <app-reactions (reactionSelected)="onReactionSelected($event)"></app-reactions>
   </div>
   <div class="comments">
-    <!-- <p *ngFor="let comment of photo?.comments">{{comment.comment}}</p> -->
-    <app-comments [comments]="photo?.comments"></app-comments>
+    <app-comments [comments]="(photo$ | async)?.comments" (newComment)="onNewComment($event)" (removeComment)="onRemoveComment($event)"></app-comments>
   </div>
 </div>

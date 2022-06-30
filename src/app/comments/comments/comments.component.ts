@@ -1,3 +1,4 @@
+import { MainService } from './../../services/main.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IComment } from 'src/app/models/IComment';
 
@@ -12,10 +13,15 @@ export class CommentsComponent implements OnInit {
   @Input() inputMaxLength: number = 250;
 
   @Output() newComment = new EventEmitter<string>();
+  @Output() removeComment = new EventEmitter<IComment>();
 
   isEmpty: boolean = true;
   newCommentContent: string = '';
 
+
+  constructor(private mainService: MainService) {
+
+  }
 
   ngOnInit(): void {
   }
@@ -31,8 +37,12 @@ export class CommentsComponent implements OnInit {
   }
 y
   onSaveComment() {
-    console.log('Saving comment...' , this.newCommentContent);
     this.newComment.emit(this.newCommentContent);
   }
+
+  onRemoveComment(comment: IComment) {
+    this.removeComment.emit(comment);
+  }
+
 
 }

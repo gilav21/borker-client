@@ -24,7 +24,7 @@ export class PetMenuItemComponent implements OnChanges {
 
   getPetImage() {
     if (this.pet && this.pet.photos && this.pet.photos.length > 0) {
-      this.petImage = this.env.GET_PET_IMAGE + this.pet.photos[0];
+      this.petImage = this.env.GET_PET_IMAGE + this.pet.photos[0]._id;
     }
   }
 

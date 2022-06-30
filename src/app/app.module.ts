@@ -15,6 +15,10 @@ import { environment } from '../environments/environment';
 import { InterceptorService } from './services/interceptor.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MapDialogComponent } from './map-dialog/map-dialog.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { BorkerFeatureKey } from './redux/borker.state';
+import { borkerReducer } from './redux/borker.reducer';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import { MapDialogComponent } from './map-dialog/map-dialog.component';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    FontAwesomeModule
+    FontAwesomeModule,
+    StoreModule.forRoot({[BorkerFeatureKey]: borkerReducer}),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [
     {

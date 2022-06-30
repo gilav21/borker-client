@@ -1,9 +1,11 @@
 import { MapDialogComponent } from './../map-dialog/map-dialog.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { IPet } from './../models/IPet';
+import { IPet, IPetCreatable } from './../models/IPet';
 import { EnviromentService } from './enviroment.service';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { BorkerActions } from '../redux/borker.types';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,8 @@ export class MainService {
   constructor(
     private http: HttpClient,
     private env: EnviromentService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private store: Store<any>
   ) { }
 
 
@@ -33,28 +36,20 @@ export class MainService {
     return this.http.get(this.env.USERS_API + `?user=${userName}`);
   }
 
-  addPet(pet: IPet) {
+  addPet(pet: IPetCreatable) {
     return this.http.post(this.env.ADD_PET, pet);
   }
 
   getPetById(petId: string) {
-    return this.http.get(this.env.PET_BY_ID + petId);
+    this.http.get<{message: string, pet: IPet}>(this.env.PET_BY_ID + petId).subscribe(results => {
+      this.store.dispatch(BorkerActions.setCurrentPet({ pet: results.pet }));
+    });
   }
 
   getPetsByUserId(userId: string) {
-    return this.http.get(this.env.PETS_BY_USER_ID + `?userId=${userId}`);
-  }
-
-  getPetImage(filename: string) {
-    return this.http.get(this.env.GET_PET_IMAGE + filename);
-  }
-
-  changeProfileImage(petId: string, imageUrl: string) {
-    const body = {
-      petId,
-      imageUrl
-    };
-    return this.http.post(this.env.SET_PET_PROFILE_PHOTO, body);
+    this.http.get<{message: string, pets :IPet[]}>(this.env.PETS_BY_USER_ID + `?userId=${userId}`).subscribe(results => {
+      this.store.dispatch(BorkerActions.setPets({ pets: results.pets }));
+    });
   }
 
   openMap(locationString?: string, location?: {lat: number, lng: number}) {

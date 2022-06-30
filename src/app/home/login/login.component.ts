@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   onLoginClicked() {
     const { email, password } = this.formGroup.getRawValue()
-    console.log('login:', email, password);
     this.login.login(email, password).subscribe((details:ILoginDetails) => {
       this.hasError = false;
       this.router.navigate(['main']);

@@ -40,7 +40,6 @@ export class PeeAndPooListComponent implements OnInit, OnChanges {
   getData({sortBy = 'createdAt', direction = -1}: {sortBy?: string, direction?: number}) {
     this.peeAndPooService.getPetPeeAndPoo(this.petId, sortBy, direction).subscribe({
       next: (results: {message: string, peeAndPoops: IPeeAndPoo[]})=>  {
-        console.log(results);
         this.peeAndPoops = results.peeAndPoops;
       },
       error: err=> {

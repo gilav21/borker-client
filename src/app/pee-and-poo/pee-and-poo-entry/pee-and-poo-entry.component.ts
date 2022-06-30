@@ -36,7 +36,6 @@ export class PeeAndPooEntryComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.peeAndPoo) {
-      console.log(`entry:`, this.peeAndPoo);
       this.formGroup = this.formBuilder.group({
         quality: new FormControl(this.peeAndPoo.quality, Validators.required),
         type: new FormControl(this.peeAndPoo.type, Validators.required),
@@ -71,7 +70,6 @@ export class PeeAndPooEntryComponent implements OnInit {
   }
 
   onOpenMap() {
-    console.log('here');
     this.mainService.openMap(this.peeAndPoo.location);
   }
 

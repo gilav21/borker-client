@@ -1,7 +1,8 @@
+<img class="img" [src]="profilePhoto | secure | async">
 <div class="comment-wrapper">
   <div class="comment-header">
-    <img class="img" [src]="profilePhoto | secure | async">
     <label class="name-label">{{comment.userId.firstName}} {{comment.userId.lastName}}</label>
+    <fa-icon class="trash-icon" [icon]="trashIcon" (click)="onRemoveComment()"></fa-icon>
   </div>
   <div class="comment-content">
     <label>{{comment.comment}}</label>

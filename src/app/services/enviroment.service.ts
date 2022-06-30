@@ -34,6 +34,15 @@ export class EnviromentService {
   readonly PHOTOS_API = this.WEB_API + 'photos/';
   readonly ADD_PHOTO_REACTION = this.PHOTOS_API + 'addReaction';
   readonly ADD_PHOTO_COMMENT = this.PHOTOS_API + 'addComment';
+  readonly GET_PHOTO_COMMENTS = this.PHOTOS_API + 'getComments';
+  readonly GET_PHOTO_REACTIONS = this.PHOTOS_API + 'getReactions';
+  readonly DELETE_PHOTO_COMMENT = this.PHOTOS_API + 'deleteComment';
+  readonly DELETE_PHOTO_REACTION = this.PHOTOS_API + 'deleteReaction';
+
+  // Comments
+  readonly COMMENTS_API = this.WEB_API + 'comments/';
+  readonly REMOVE_COMMENT = this.COMMENTS_API + 'removeComment';
+
 
 }
 

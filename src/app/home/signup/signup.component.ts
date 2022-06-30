@@ -34,11 +34,9 @@ export class SignupComponent implements OnInit {
   testUserName(userName: string) {
     this.loginService.checkUserName(userName).subscribe({
       next: (result: { message: string }) => {
-        console.log('next?');
         this.formGroup.controls['userName'].setErrors(null);
         this.userNameMessage = result.message;
       }, error: (err: HttpErrorResponse) => {
-        console.log('error?');
         this.formGroup.controls['userName'].setErrors({ notUniqe: true });
         this.userNameMessage = err.error.error;
       }
@@ -48,11 +46,9 @@ export class SignupComponent implements OnInit {
   testEmail(email: string) {
     this.loginService.checkEmail(email).subscribe({
       next: (result: { message: string }) => {
-        console.log('next?');
         this.formGroup.controls['email'].setErrors(null);
         this.emailMessage = result.message;
       }, error: (err: HttpErrorResponse) => {
-        console.log('error?');
         this.formGroup.controls['email'].setErrors({ notUniqe: true });
         this.emailMessage = err.error.error;
       }
@@ -68,9 +64,7 @@ export class SignupComponent implements OnInit {
       lastName: formContent.lastName
     }
     this.loginService.signup(user, formContent.password).subscribe(details => {
-      console.log('signed up: ', details);
       this.loginService.login(user.email, formContent.password).subscribe(results => {
-        console.log('logged in after signup!', results);
         // Navigate to home page
         this.router.navigate(['/main'])
       }, err => {

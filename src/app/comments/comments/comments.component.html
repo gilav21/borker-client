@@ -5,6 +5,6 @@
     <button mat-raised-button (click)="onSaveComment()" [disabled]="isEmpty">Post</button>
   </div>
   <div class="comments-list">
-    <app-comment class="comment" *ngFor="let comment of comments" [comment]="comment"></app-comment>
+    <app-comment class="comment" *ngFor="let comment of comments" [comment]="comment"(removeComment)="onRemoveComment(comment)" ></app-comment>
   </div>
 </div>

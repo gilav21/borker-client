@@ -6,13 +6,20 @@
   border-radius: 10px;
   margin-right: 5px;
   padding: 5px;
+  flex: 1;
 }
 
 .comment-header {
   display: flex;
+  justify-content: space-between;
   gap: 10px;
   padding-bottom: 5px;
   border-bottom: 1px solid #80808040;
+}
+
+.trash-icon {
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 .img {
@@ -26,4 +33,9 @@
   flex-direction: column;
   justify-content: center;
   font-weight: bold;
+}
+
+:host {
+  display: flex;
+  gap: 5px;
 }

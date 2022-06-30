@@ -1,3 +1,5 @@
+import { BorkerSelectors, BorkerActions } from 'src/app/redux/borker.types';
+import { Observable } from 'rxjs';
 import { PhotosService } from './../photos.service';
 import { EnviromentService } from 'src/app/services/enviroment.service';
 import { IPet } from 'src/app/models/IPet';
@@ -6,6 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { IPhoto } from 'src/app/models/IPhoto';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-photo-dialog',
@@ -14,38 +17,31 @@ import { IPhoto } from 'src/app/models/IPhoto';
 })
 export class PhotoDialogComponent implements OnInit {
 
-  pet: IPet;
-  photoUrl: string;
   isFirst: boolean;
   isLast: boolean;
-  photo: IPhoto;
+
+  photo$: Observable<IPhoto>;
+  pet$: Observable<IPet>;
+  photoUrl$: Observable<string>;
 
   leftIcon: IconDefinition;
   rightIcon: IconDefinition;
 
   constructor(private dialogRef: MatDialogRef<PhotoDialogComponent>,
     private env: EnviromentService,
-    private photosService: PhotosService,
+    private store: Store<any>,
     @Inject(MAT_DIALOG_DATA) public data) { }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
+    this.photo$ = this.store.select(BorkerSelectors.selectCurrentPhoto);
+    this.pet$ = this.store.select(BorkerSelectors.selectCurrentPet);
     this.leftIcon = faArrowLeft;
     this.rightIcon = faArrowRight;
-
     const photoId = this.data.photoId;
-    this.photosService.getPhoto(photoId).subscribe({
-      next: ((results: {message: string, photo: IPhoto}) => {
-        console.log(results);
-        this.photo = results.photo;
-      }),
-      error: (err => {
-        console.error(err);
-      })
-    })
-    this.photoUrl = this.env.GET_PET_IMAGE + photoId;
+    this.photoUrl$ = this.store.select(BorkerSelectors.selectCurrentPhotoUrl);
     this.isFirst = this.data.isFirst;
     this.isLast = this.data.isLast;
-    this.pet = this.data.pet;
+
   }
 
   @HostListener('document:keydown', ['$event']) onKeyDown(event: KeyboardEvent) {

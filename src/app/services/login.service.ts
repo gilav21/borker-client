@@ -1,3 +1,4 @@
+import { BorkerActions } from 'src/app/redux/borker.types';
 import { Router } from '@angular/router';
 import { IUserDetails } from './../models/ILoginDetails';
 import { EnviromentService } from './enviroment.service';
@@ -6,6 +7,7 @@ import { Injectable } from '@angular/core';
 import { ILoginDetails } from '../models/ILoginDetails';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, map, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +41,7 @@ export class LoginService {
     return this._isLoggedIn$.value;
   }
 
-  constructor(private http: HttpClient, private env: EnviromentService, private jwtHelper: JwtHelperService, private router: Router) {
+  constructor(private http: HttpClient, private env: EnviromentService, private jwtHelper: JwtHelperService, private router: Router, private store: Store) {
     const token = localStorage.getItem('token');
     if (!jwtHelper.isTokenExpired(token?.toString())) {
       const expiresString = localStorage.getItem('expriesIn');
@@ -49,6 +51,7 @@ export class LoginService {
         expiresIn: expiresString ? +expiresString : null
       }
       this.setIsLoggedIn$(true);
+      this.store.dispatch(BorkerActions.setUser(this._loginDetails));
     }
     this.resetIdleCounter();
   }
@@ -77,6 +80,7 @@ export class LoginService {
       localStorage.setItem('expiresIn', details.expiresIn.toString());
       console.log('logged in: ', this.loginDetails);
       this.setIsLoggedIn$(true);
+      this.store.dispatch(BorkerActions.setUser(this.loginDetails));
       return details;
     }));
   }

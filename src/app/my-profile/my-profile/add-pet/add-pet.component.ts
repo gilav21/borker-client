@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { IPet } from 'src/app/models/IPet';
+import { IPet, IPetCreatable } from 'src/app/models/IPet';
 import { IUserDetails } from './../../../models/ILoginDetails';
 import { MainService } from './../../../services/main.service';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
@@ -59,7 +59,7 @@ export class AddPetComponent implements OnInit {
   }
 
   onAddClicked() {
-    const newPet: IPet = {
+    const newPet: IPetCreatable = {
       name: this.nameControl.value,
       owners: this.owners.map(owner => owner._id),
       photos: [],
@@ -72,8 +72,6 @@ export class AddPetComponent implements OnInit {
         if (this.photos.length > 0) {
           this.mainService.uploadPetImages(results.petId, this.photos).subscribe({
             next: photos => {
-              console.log('Photos added', photos);
-              this.mainService.changeProfileImage(results.petId, photos[0]);
               this.router.navigate(['main']);
             },
             error: err => {

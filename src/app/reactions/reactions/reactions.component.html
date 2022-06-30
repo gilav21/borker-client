@@ -1,3 +1,3 @@
 <div class="icons-wrapper">
-  <fa-icon class="icon" *ngFor="let icon of icons; let index = index" [class.selected]="selectedIndex === index" [icon]="icon" (click)="selectReaction(index)"></fa-icon>
+  <fa-icon class="icon" *ngFor="let icon of icons; let index = index" [class.selected]="isSelected(index)" [icon]="icon" (click)="selectReaction(index)"></fa-icon>
 </div>
